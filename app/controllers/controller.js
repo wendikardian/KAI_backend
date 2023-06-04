@@ -143,3 +143,34 @@ exports.getSpesificStation = (req, res) => {
     }
   });
 };
+
+exports.editStation = (req, res) => {
+  const id = req.params.id;
+  const { name, city, address } = req.body;
+
+  const query = `UPDATE station SET name = ?, city = ?, address = ? WHERE id = ?`;
+
+  connection.query(query, [name, city, address, id], (err, results) => {
+    if (err) {
+      console.error("Error updating station data:", err);
+      res.status(500).json({ error: "Failed to update station data" });
+    } else {
+      res.json({ message: "Station updated successfully" });
+    }
+  });
+};
+
+exports.deleteStation = (req, res) => {
+  const id = req.params.id;
+
+  const query = `DELETE FROM station WHERE id = ?`;
+
+  connection.query(query, [id], (err, results) => {
+    if (err) {
+      console.error("Error deleting station data:", err);
+      res.status(500).json({ error: "Failed to delete station data" });
+    } else {
+      res.json({ message: "Station deleted successfully" });
+    }
+  });
+};
