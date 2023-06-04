@@ -11,7 +11,18 @@ const {
   addStation,
   getSpesificStation,
   editStation,
-  deleteStation
+  deleteStation,
+  addRoute,
+  getRoute,
+  getSpecificRoute,
+  getTrain,
+  addSchedule,
+  getSchedule,
+  getSpesificUser,
+  getSeat,
+  getScheduleById,
+  addBooking,
+  getTicket
 } = require("./app/controllers/controller.js");
 
 var corsOptions = {
@@ -30,11 +41,22 @@ app.get("/", (req, res) => {
 
 app.post("/user", signup);
 app.post("/login", login);
+app.get("/user/:username", getSpesificUser);
 app.get("/station", getStation);
 app.post("/add_station", addStation);
 app.get("/station/:id", getSpesificStation);
 app.put("/station/:id", editStation);
 app.delete("/station/:id", deleteStation);
+app.post("/add_route", addRoute);
+app.get("/route", getRoute);
+app.get("/route/:id", getSpecificRoute);
+app.get("/train", getTrain);
+app.post("/add_schedule", addSchedule);
+app.get("/schedule", getSchedule);
+app.get("/schedule/:id", getScheduleById);
+app.get("/seat", getSeat);
+app.post("/booking", addBooking);
+app.get("/ticket/:id", getTicket);
 
 const port = 3000; // choose any available port
 app.listen(port, () => {
