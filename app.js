@@ -22,7 +22,10 @@ const {
   getSeat,
   getScheduleById,
   addBooking,
-  getTicket
+  getTicket,
+  editTicket,
+  getWagon,
+  getPassanger
 } = require("./app/controllers/controller.js");
 
 var corsOptions = {
@@ -57,6 +60,10 @@ app.get("/schedule/:id", getScheduleById);
 app.get("/seat", getSeat);
 app.post("/booking", addBooking);
 app.get("/ticket/:id", getTicket);
+app.put("/ticket/", editTicket);
+app.get("/wagon", getWagon);
+app.get("/passanger/:id", getPassanger);
+
 
 const port = 3000; // choose any available port
 app.listen(port, () => {

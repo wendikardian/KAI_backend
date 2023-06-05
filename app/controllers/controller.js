@@ -364,3 +364,54 @@ exports.getTicket = (req, res) => {
     }
   });
 };
+
+exports.editTicket = (req, res) => {
+  const {id, no_transaction} = req.body;
+
+  const query = `UPDATE ticket SET payment_status = 2, no_transaction = ? WHERE id = ?`;
+
+  connection.query(query, [no_transaction, id], (err, results) => {
+    if (err) {
+      console.error("Error updating station data:", err);
+      res.status(500).json({ error: "Failed to update station data" });
+    } else {
+      res.json({ message: "Station updated successfully" });
+    }
+  });
+};
+
+exports.getWagon = (req, res) => {
+  const query = `SELECT * FROM wagon`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error("Error retrieving station data:", err);
+      res.status(500).json({ error: "Failed to retrieve station data" });
+    } else {
+      if (results.length === 0) {
+        res.status(404).json({ message: "Station not found" });
+      } else {
+        res.json(results);
+      }
+    }
+  });
+};
+
+exports.getPassanger = (req, res) => {
+  const id = req.params.id;
+
+  const query = `SELECT * FROM ticket WHERE schedule_id = ?`;
+
+  connection.query(query, [id], (err, results) => {
+    if (err) {
+      console.error("Error retrieving station data:", err);
+      res.status(500).json({ error: "Failed to retrieve station data" });
+    } else {
+      if (results.length === 0) {
+        res.status(404).json({ message: "Station not found" });
+      } else {
+        res.json(results);
+      }
+    }
+  });
+};
