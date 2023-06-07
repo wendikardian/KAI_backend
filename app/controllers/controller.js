@@ -366,7 +366,7 @@ exports.getTicket = (req, res) => {
 };
 
 exports.editTicket = (req, res) => {
-  const {id, no_transaction} = req.body;
+  const { id, no_transaction } = req.body;
 
   const query = `UPDATE ticket SET payment_status = 2, no_transaction = ? WHERE id = ?`;
 
